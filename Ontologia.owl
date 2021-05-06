@@ -1,0 +1,316 @@
+@prefix : <http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3> .
+
+<http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Bebidas
+:Bebidas rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdfs:domain :Menu ;
+         rdfs:range :Bebida ;
+         rdfs:comment "Lista de bebidas del menú propuesto: una por plato si así lo ha pedido el usuario o sino sólo una." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#BebidasComplementarias
+:BebidasComplementarias rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf owl:topObjectProperty ;
+                        rdfs:domain :Plato ;
+                        rdfs:range :Bebida ;
+                        rdfs:comment "Bebidas que acompañan bien al plato." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#CumplePreferencias
+:CumplePreferencias rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdfs:domain :Plato ;
+                    rdfs:range :Preferencia ;
+                    rdfs:comment "Preferencias que el plato satisface." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#CumpleRestricciones
+:CumpleRestricciones rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf owl:topObjectProperty ;
+                     rdfs:domain :Ingrediente ;
+                     rdfs:range :RestriccionAlimentaria ;
+                     rdfs:comment "Restricciones alimentarias que cumple el ingrediente." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Disponibilidad
+:Disponibilidad rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty ;
+                rdfs:domain :Ingrediente ,
+                            :Plato ;
+                rdfs:range :Temporada ;
+                rdfs:comment "Lista de temporadas donde el producto está disponible." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Ingredientes
+:Ingredientes rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :Plato ;
+              rdfs:range :Ingrediente ;
+              rdfs:comment "Ingredientes de los que se compone el plato." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#IngredientesProhibidos
+:IngredientesProhibidos rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf owl:topObjectProperty ;
+                        rdfs:domain :DatosEvento ;
+                        rdfs:range :Ingrediente ;
+                        rdfs:comment "Lista de ingredientes que no pueden estar presentes en los menús propuestos para el evento." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#PlatosAptos
+:PlatosAptos rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain :RestriccionAlimentaria ;
+             rdfs:range :Plato ;
+             rdfs:comment "Lista de platos que cumplen con la restricción alimentaria" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#PlatosCompatibles
+:PlatosCompatibles rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf owl:topObjectProperty ;
+                   rdfs:domain :Plato ;
+                   rdfs:range :Plato ;
+                   rdfs:comment "Lista de platos compatibles con el plato." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Postre
+:Postre rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf owl:topObjectProperty ;
+        rdf:type owl:FunctionalProperty ;
+        rdfs:domain :Menu ;
+        rdfs:range :Plato ;
+        rdfs:comment "Plato de postre del menú." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Preferencias
+:Preferencias rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :DatosEvento ;
+              rdfs:range :Preferencia ;
+              rdfs:comment "Lista de preferencias alimentarias que el usuario especifica para el evento." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Primero
+:Primero rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdf:type owl:FunctionalProperty ;
+         rdfs:domain :Menu ;
+         rdfs:range :Plato ;
+         rdfs:comment "Primer plato del menú." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Restricciones
+:Restricciones rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               rdfs:domain :DatosEvento ;
+               rdfs:range :RestriccionAlimentaria ;
+               rdfs:comment "Lista de restricciones alimentarias que el usuario especifica para el evento." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Segundo
+:Segundo rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdf:type owl:FunctionalProperty ;
+         rdfs:domain :Menu ;
+         rdfs:range :Plato ;
+         rdfs:comment "Segundo plato del menú." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#TemporadaActual
+:TemporadaActual rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain :DatosEvento ;
+                 rdfs:range :Temporada ;
+                 rdfs:comment "Temporada de la fecha en la que ocurre el evento." .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#BebidaAlcoholica
+:BebidaAlcoholica rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain :DatosEvento ;
+                  rdfs:range xsd:boolean ;
+                  rdfs:comment "Indica si las bebidas del menu generado son o no alcoholicas." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#BebidaPorPlatos
+:BebidaPorPlatos rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain :DatosEvento ;
+                 rdfs:range xsd:boolean ;
+                 rdfs:comment "Indica si se quiere tener una bebida para cada uno de los platos, o solo una para todo el menú del evento." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Complejidad
+:Complejidad rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdf:type owl:FunctionalProperty ;
+             rdfs:domain :Plato ;
+             rdfs:range xsd:integer ;
+             rdfs:comment "La complejidad del plato indica si es apropiado o no servirlo para un número elevado de comensales." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#InfoGeneral
+:InfoGeneral rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain :Plato ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Lista de descriptores generales del plato." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Nombre
+:Nombre rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf owl:topDataProperty ;
+        rdf:type owl:FunctionalProperty ;
+        rdfs:domain :Bebida ,
+                    :Ingrediente ,
+                    :Plato ,
+                    :Preferencia ,
+                    :RestriccionAlimentaria ,
+                    :Temporada ;
+        rdfs:range xsd:string ;
+        rdfs:comment "Nombre identificador de una instancia de la clase." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#NumeroComensales
+:NumeroComensales rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain :DatosEvento ;
+                  rdfs:range xsd:integer ;
+                  rdfs:comment "Numero de personas que atenderán al evento." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Precio
+:Precio rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf owl:topDataProperty ;
+        rdf:type owl:FunctionalProperty ;
+        rdfs:domain :Bebida ,
+                    :Menu ,
+                    :Plato ;
+        rdfs:range xsd:float ;
+        rdfs:comment "Precio del producto." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#PrecioMax
+:PrecioMax rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf owl:topDataProperty ;
+           rdf:type owl:FunctionalProperty ;
+           rdfs:domain :DatosEvento ;
+           rdfs:range xsd:float ;
+           rdfs:comment "Máximo precio que el usuario está dispuesto a pagar por un menú para el evento." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#PrecioMin
+:PrecioMin rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf owl:topDataProperty ;
+           rdf:type owl:FunctionalProperty ;
+           rdfs:domain :DatosEvento ;
+           rdfs:range xsd:float ;
+           rdfs:comment "Mínimo precio que el usuario está dispuesto a pagar por un menú para el evento." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#PuntuacionMenu
+:PuntuacionMenu rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdf:type owl:FunctionalProperty ;
+                rdfs:domain :Menu ;
+                rdfs:range xsd:integer ;
+                rdfs:comment "Indica el nivel de satisfacción de preferencias del usuario que tiene el menú." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#TipoEnMenu
+:TipoEnMenu rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf owl:topDataProperty ;
+            rdfs:domain :Plato ;
+            rdfs:range xsd:string ;
+            rdfs:comment "Indica si el plato es considerado un primero, un segundo, ambos, o un postre." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#TipoEvento
+:TipoEvento rdf:type owl:DatatypeProperty ;
+            rdfs:domain :DatosEvento ;
+            rdfs:range xsd:string ;
+            rdfs:comment "Indica si se trata de un evento familiar o congreso." .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Bebida
+:Bebida rdf:type owl:Class ;
+        rdfs:comment "Guarda la información referente a una bebida." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#DatosEvento
+:DatosEvento rdf:type owl:Class ;
+             rdfs:comment "Recoge los datos proporcionados por el usuario sobre el evento que se quiere planificar." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Ingrediente
+:Ingrediente rdf:type owl:Class ;
+             rdfs:comment "Guarda la información referente a un ingrediente." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Menu
+:Menu rdf:type owl:Class ;
+      rdfs:comment "Recoge la información de la construcción de un menú hecha por el programa, una instancia representa una posible parte de la solución que se enseña al usuario. Inicialmente no tiene instancias." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Plato
+:Plato rdf:type owl:Class ;
+       rdfs:comment "Guarda la información referente a un plato. Esta es la clase alrededor de la qual se envuelve toda la ontología." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Preferencia
+:Preferencia rdf:type owl:Class ;
+             rdfs:comment "Guarda nombres de preferencias alimentarias. Los menús generados intentarán satisfacer (no obligadamente) el mayor número de éstas. Las instancias de esta clase estan definidas inicialmente y se pregunta al usuario que escoja un subconjunto de éstas para personalizar los menús." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#RestriccionAlimentaria
+:RestriccionAlimentaria rdf:type owl:Class ;
+                        rdfs:comment "Guarda el nombre de restricciones alimentarias de cumplimiento obligatorio, como pueden ser alérgias, intolerancias o que sea vegetariano. La solución propuesta debe contener sólamente ingredientes que cumplan las restricciones indicadas, que se preguntarán al usuario." .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Temporada
+:Temporada rdf:type owl:Class ;
+           rdfs:comment "Guarda el nombre de una temporada concreta. Hay un conjunto de instancias iniciales que cubren todas las temporadas en las que funciona el restaurante." .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Bebida
+                :DatosEvento
+                :Ingrediente
+                :Menu
+                :Plato
+                :Preferencia
+                :RestriccionAlimentaria
+                :Temporada
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
