@@ -28,6 +28,14 @@
          rdfs:comment "Lista de bebidas del menú propuesto: una por plato si así lo ha pedido el usuario o sino sólo una." .
 
 
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#BebidasIncompatibles
+:BebidasIncompatibles rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf owl:topObjectProperty ;
+                      rdfs:domain :Bebida ;
+                      rdfs:range :Bebida ;
+                      rdfs:comment "Bebidas incompatibles con una bebida en concreto" .
+
+
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#BebidasRecomendadas
 :BebidasRecomendadas rdf:type owl:ObjectProperty ;
                      rdfs:subPropertyOf owl:topObjectProperty ;
@@ -47,7 +55,8 @@
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#CumpleRestricciones
 :CumpleRestricciones rdf:type owl:ObjectProperty ;
                      rdfs:subPropertyOf owl:topObjectProperty ;
-                     rdfs:domain :Ingrediente ;
+                     rdfs:domain :Bebida ,
+                                 :Ingrediente ;
                      rdfs:range :RestriccionAlimentaria ;
                      rdfs:comment "Restricciones alimentarias que cumple el ingrediente." .
 
@@ -68,14 +77,6 @@
               rdfs:comment "Ingredientes de los que se compone el plato." .
 
 
-###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#IngredientesProhibidos
-:IngredientesProhibidos rdf:type owl:ObjectProperty ;
-                        rdfs:subPropertyOf owl:topObjectProperty ;
-                        rdfs:domain :DatosEvento ;
-                        rdfs:range :Ingrediente ;
-                        rdfs:comment "Lista de ingredientes que no pueden estar presentes en los menús propuestos para el evento." .
-
-
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Postre
 :Postre rdf:type owl:ObjectProperty ;
         rdfs:subPropertyOf owl:topObjectProperty ;
@@ -83,14 +84,6 @@
         rdfs:domain :Menu ;
         rdfs:range :Plato ;
         rdfs:comment "Plato de postre del menú." .
-
-
-###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Preferencias
-:Preferencias rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf owl:topObjectProperty ;
-              rdfs:domain :DatosEvento ;
-              rdfs:range :Preferencia ;
-              rdfs:comment "Lista de preferencias alimentarias que el usuario especifica para el evento." .
 
 
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Primero
@@ -102,14 +95,6 @@
          rdfs:comment "Primer plato del menú." .
 
 
-###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Restricciones
-:Restricciones rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf owl:topObjectProperty ;
-               rdfs:domain :DatosEvento ;
-               rdfs:range :RestriccionAlimentaria ;
-               rdfs:comment "Lista de restricciones alimentarias que el usuario especifica para el evento." .
-
-
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Segundo
 :Segundo rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf owl:topObjectProperty ;
@@ -117,15 +102,6 @@
          rdfs:domain :Menu ;
          rdfs:range :Plato ;
          rdfs:comment "Segundo plato del menú." .
-
-
-###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#TemporadaActual
-:TemporadaActual rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf owl:topObjectProperty ;
-                 rdf:type owl:FunctionalProperty ;
-                 rdfs:domain :DatosEvento ;
-                 rdfs:range :Temporada ;
-                 rdfs:comment "Temporada de la fecha en la que ocurre el evento." .
 
 
 #################################################################
@@ -136,19 +112,9 @@
 :BebidaAlcoholica rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf owl:topDataProperty ;
                   rdf:type owl:FunctionalProperty ;
-                  rdfs:domain :Bebida ,
-                              :DatosEvento ;
+                  rdfs:domain :Bebida ;
                   rdfs:range xsd:boolean ;
                   rdfs:comment "Indica si las bebidas del menu generado son o no alcoholicas." .
-
-
-###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#BebidaPorPlatos
-:BebidaPorPlatos rdf:type owl:DatatypeProperty ;
-                 rdfs:subPropertyOf owl:topDataProperty ;
-                 rdf:type owl:FunctionalProperty ;
-                 rdfs:domain :DatosEvento ;
-                 rdfs:range xsd:boolean ;
-                 rdfs:comment "Indica si se quiere tener una bebida para cada uno de los platos, o solo una para todo el menú del evento." .
 
 
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Complejidad
@@ -183,15 +149,6 @@
         rdfs:comment "Nombre identificador de una instancia de la clase." .
 
 
-###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#NumeroComensales
-:NumeroComensales rdf:type owl:DatatypeProperty ;
-                  rdfs:subPropertyOf owl:topDataProperty ;
-                  rdf:type owl:FunctionalProperty ;
-                  rdfs:domain :DatosEvento ;
-                  rdfs:range xsd:integer ;
-                  rdfs:comment "Numero de personas que atenderán al evento." .
-
-
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Precio
 :Precio rdf:type owl:DatatypeProperty ;
         rdfs:subPropertyOf owl:topDataProperty ;
@@ -201,24 +158,6 @@
                     :Plato ;
         rdfs:range xsd:float ;
         rdfs:comment "Precio del producto." .
-
-
-###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#PrecioMax
-:PrecioMax rdf:type owl:DatatypeProperty ;
-           rdfs:subPropertyOf owl:topDataProperty ;
-           rdf:type owl:FunctionalProperty ;
-           rdfs:domain :DatosEvento ;
-           rdfs:range xsd:float ;
-           rdfs:comment "Máximo precio que el usuario está dispuesto a pagar por un menú para el evento." .
-
-
-###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#PrecioMin
-:PrecioMin rdf:type owl:DatatypeProperty ;
-           rdfs:subPropertyOf owl:topDataProperty ;
-           rdf:type owl:FunctionalProperty ;
-           rdfs:domain :DatosEvento ;
-           rdfs:range xsd:float ;
-           rdfs:comment "Mínimo precio que el usuario está dispuesto a pagar por un menú para el evento." .
 
 
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#PuntuacionMenu
@@ -233,16 +172,10 @@
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#TipoEnMenu
 :TipoEnMenu rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf owl:topDataProperty ;
+            rdf:type owl:FunctionalProperty ;
             rdfs:domain :Plato ;
             rdfs:range xsd:string ;
             rdfs:comment "Indica si el plato es considerado un primero, un segundo, ambos, o un postre." .
-
-
-###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#TipoEvento
-:TipoEvento rdf:type owl:DatatypeProperty ;
-            rdfs:domain :DatosEvento ;
-            rdfs:range xsd:string ;
-            rdfs:comment "Indica si se trata de un evento familiar o congreso." .
 
 
 #################################################################
@@ -252,11 +185,6 @@
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Bebida
 :Bebida rdf:type owl:Class ;
         rdfs:comment "Guarda la información referente a una bebida." .
-
-
-###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#DatosEvento
-:DatosEvento rdf:type owl:Class ;
-             rdfs:comment "Recoge los datos proporcionados por el usuario sobre el evento que se quiere planificar." .
 
 
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Ingrediente
@@ -296,6 +224,10 @@
 ###  http://webprotege.stanford.edu/Agua
 <http://webprotege.stanford.edu/Agua> rdf:type owl:NamedIndividual ,
                                                :Bebida ;
+                                      :CumpleRestricciones :intolerancia_gluten ,
+                                                           :intolerancia_lactosa ,
+                                                           :vegano ,
+                                                           :vegetariano ;
                                       :BebidaAlcoholica "false"^^xsd:boolean ;
                                       :Nombre "Agua" ;
                                       :Precio 1.50 ;
@@ -305,6 +237,10 @@
 ###  http://webprotege.stanford.edu/Agua_con_gas
 <http://webprotege.stanford.edu/Agua_con_gas> rdf:type owl:NamedIndividual ,
                                                        :Bebida ;
+                                              :CumpleRestricciones :intolerancia_gluten ,
+                                                                   :intolerancia_lactosa ,
+                                                                   :vegano ,
+                                                                   :vegetariano ;
                                               :BebidaAlcoholica "false"^^xsd:boolean ;
                                               :Nombre "Agua con gas" ;
                                               :Precio 1.60 ;
@@ -317,7 +253,8 @@
                                                             :BebidasRecomendadas <http://webprotege.stanford.edu/Agua> ,
                                                                                  <http://webprotege.stanford.edu/Agua_con_gas> ,
                                                                                  <http://webprotege.stanford.edu/Cerveza_Moritz> ,
-                                                                                 <http://webprotege.stanford.edu/Copa_de_vino_tinto_Fuenteseca> ;
+                                                                                 <http://webprotege.stanford.edu/Copa_de_vino_tinto_Fuenteseca> ,
+                                                                                 :Cerveza_Daura ;
                                                             :CumplePreferencias :clásico ,
                                                                                 :regional ;
                                                             :Ingredientes <http://webprotege.stanford.edu/ajo> ,
@@ -331,7 +268,7 @@
                                                                           :huevo ,
                                                                           :sal ;
                                                             :Complejidad 75 ;
-                                                            :InfoGeneral "Plato caliente de carne"^^xsd:string ;
+                                                            :InfoGeneral "Plato caliente de carne picada y setas"^^xsd:string ;
                                                             :Nombre "Albóndigas con champiñones" ;
                                                             :Precio 12.00 ;
                                                             :TipoEnMenu "segundo"^^xsd:string ;
@@ -345,7 +282,8 @@
                                                                         <http://webprotege.stanford.edu/Cerveza_Estrella_Damm> ,
                                                                         <http://webprotege.stanford.edu/Cerveza_Estrella_Galicia_1906> ,
                                                                         <http://webprotege.stanford.edu/Cerveza_Moritz> ,
-                                                                        <http://webprotege.stanford.edu/Copa_de_vino_tinto_Fuenteseca> ;
+                                                                        <http://webprotege.stanford.edu/Copa_de_vino_tinto_Fuenteseca> ,
+                                                                        :Cerveza_Daura ;
                                                    :CumplePreferencias :clásico ,
                                                                        :regional ;
                                                    :Ingredientes <http://webprotege.stanford.edu/ajo> ,
@@ -373,7 +311,7 @@
                                                                          <http://webprotege.stanford.edu/plátano> ;
                                                            :Complejidad 6 ;
                                                            :InfoGeneral "Batido fresco de fresa y plátano"^^xsd:string ;
-                                                           :Nombre "Batido de fresa y plátano" ;
+                                                           :Nombre "Batido mediano de fresa y plátano frescos"^^xsd:string ;
                                                            :Precio 7.00 ;
                                                            :TipoEnMenu "postre"^^xsd:string ;
                                                            rdfs:label "Batido_de_fresa_y_plátano" .
@@ -403,9 +341,58 @@
                                                                 rdfs:label "Berenjenas_rellenas_gratinadas"^^xsd:string .
 
 
+###  http://webprotege.stanford.edu/Bocadillo_de_butifarra
+<http://webprotege.stanford.edu/Bocadillo_de_butifarra> rdf:type owl:NamedIndividual ,
+                                                                 :Plato ;
+                                                        <http://webprotege.stanford.edu/PlatosIncompatibles> <http://webprotege.stanford.edu/Bocadillo_de_butifarra> ,
+                                                                                                             <http://webprotege.stanford.edu/Bocadillo_de_tortilla_de_patata> ;
+                                                        :BebidasRecomendadas <http://webprotege.stanford.edu/Agua> ,
+                                                                             <http://webprotege.stanford.edu/Refresco_Aquarius> ,
+                                                                             <http://webprotege.stanford.edu/Refresco_Fanta> ,
+                                                                             <http://webprotege.stanford.edu/Refresco_Nestea> ;
+                                                        :CumplePreferencias :clásico ,
+                                                                            :regional ;
+                                                        :Ingredientes <http://webprotege.stanford.edu/pan> ,
+                                                                      :aceite_de_oliva ,
+                                                                      :butifarra ,
+                                                                      :tomate ;
+                                                        :Complejidad 5 ;
+                                                        :InfoGeneral "Bocadillo caliente de butifarra con pan con tomate y aceite"^^xsd:string ;
+                                                        :Nombre "Bocadillo de butifarra" ;
+                                                        :Precio 3.50 ;
+                                                        :TipoEnMenu "primero_segundo"^^xsd:string ;
+                                                        rdfs:label "Bocadillo_de_butifarra" .
+
+
+###  http://webprotege.stanford.edu/Bocadillo_de_tortilla_de_patata
+<http://webprotege.stanford.edu/Bocadillo_de_tortilla_de_patata> rdf:type owl:NamedIndividual ,
+                                                                          :Plato ;
+                                                                 <http://webprotege.stanford.edu/PlatosIncompatibles> <http://webprotege.stanford.edu/Bocadillo_de_butifarra> ,
+                                                                                                                      <http://webprotege.stanford.edu/Bocadillo_de_tortilla_de_patata> ;
+                                                                 :BebidasRecomendadas <http://webprotege.stanford.edu/Agua> ,
+                                                                                      <http://webprotege.stanford.edu/Agua_con_gas> ,
+                                                                                      <http://webprotege.stanford.edu/Refresco_Aquarius> ,
+                                                                                      <http://webprotege.stanford.edu/Refresco_Coca_Cola> ;
+                                                                 :CumplePreferencias :clásico ,
+                                                                                     :regional ;
+                                                                 :Ingredientes <http://webprotege.stanford.edu/pan> ,
+                                                                               <http://webprotege.stanford.edu/patata> ,
+                                                                               :aceite_de_oliva ,
+                                                                               :huevo ,
+                                                                               :tomate ;
+                                                                 :Complejidad 5 ;
+                                                                 :InfoGeneral "Plato caliente, pan con tortilla de patata, aceite y tomate"^^xsd:string ;
+                                                                 :Nombre "Bocadillo de tortilla de patata"^^xsd:string ;
+                                                                 :Precio 3.00 ;
+                                                                 :TipoEnMenu "primero_segundo"^^xsd:string ;
+                                                                 rdfs:label "Bocadillo_de_tortilla_de_patata" .
+
+
 ###  http://webprotege.stanford.edu/Brownie
 <http://webprotege.stanford.edu/Brownie> rdf:type owl:NamedIndividual ,
                                                   :Plato ;
+                                         :CumplePreferencias :clásico ,
+                                                             :moderno ;
                                          :Ingredientes <http://webprotege.stanford.edu/azúcar> ,
                                                        <http://webprotege.stanford.edu/chocolate> ,
                                                        <http://webprotege.stanford.edu/frutos_secos> ,
@@ -428,16 +415,18 @@
                                                                            <http://webprotege.stanford.edu/Agua_con_gas> ,
                                                                            <http://webprotege.stanford.edu/Cerveza_Estrella_Damm> ,
                                                                            <http://webprotege.stanford.edu/Copa_de_vino_tinto_Vivanco> ,
-                                                                           <http://webprotege.stanford.edu/Refresco_Nestea> ;
+                                                                           <http://webprotege.stanford.edu/Refresco_Nestea> ,
+                                                                           :Cerveza_Daura ;
                                                       :CumplePreferencias :clásico ,
                                                                           :regional ;
                                                       :Ingredientes <http://webprotege.stanford.edu/ajo> ,
                                                                     <http://webprotege.stanford.edu/judía> ,
                                                                     <http://webprotege.stanford.edu/perejil> ,
                                                                     :aceite_de_oliva ,
+                                                                    :butifarra ,
                                                                     :sal ;
                                                       :Complejidad 40 ;
-                                                      :InfoGeneral "Plato caliente de carne"^^xsd:string ;
+                                                      :InfoGeneral "Plato caliente de carne y legumbres"^^xsd:string ;
                                                       :Nombre "Butifarra con judías" ;
                                                       :Precio 11.50 ;
                                                       :TipoEnMenu "segundo"^^xsd:string ;
@@ -478,6 +467,15 @@
 ###  http://webprotege.stanford.edu/Cava_Anna_de_Codorniu
 <http://webprotege.stanford.edu/Cava_Anna_de_Codorniu> rdf:type owl:NamedIndividual ,
                                                                 :Bebida ;
+                                                       :BebidasIncompatibles <http://webprotege.stanford.edu/Refresco_Aquarius> ,
+                                                                             <http://webprotege.stanford.edu/Refresco_Coca_Cola> ,
+                                                                             <http://webprotege.stanford.edu/Refresco_Fanta> ,
+                                                                             <http://webprotege.stanford.edu/Refresco_Nestea> ,
+                                                                             <http://webprotege.stanford.edu/Zumo_natural> ;
+                                                       :CumpleRestricciones :intolerancia_gluten ,
+                                                                            :intolerancia_lactosa ,
+                                                                            :vegano ,
+                                                                            :vegetariano ;
                                                        :BebidaAlcoholica "true"^^xsd:boolean ;
                                                        :Nombre "Cava Anna de Codorniu" ;
                                                        :Precio 19.00 ;
@@ -500,6 +498,9 @@
 ###  http://webprotege.stanford.edu/Cerveza_Estrella_Damm
 <http://webprotege.stanford.edu/Cerveza_Estrella_Damm> rdf:type owl:NamedIndividual ,
                                                                 :Bebida ;
+                                                       :CumpleRestricciones :intolerancia_lactosa ,
+                                                                            :vegano ,
+                                                                            :vegetariano ;
                                                        :BebidaAlcoholica "true"^^xsd:boolean ;
                                                        :Nombre "Cerveza Estrella Damm" ;
                                                        :Precio 2.50 ;
@@ -509,6 +510,9 @@
 ###  http://webprotege.stanford.edu/Cerveza_Estrella_Galicia_1906
 <http://webprotege.stanford.edu/Cerveza_Estrella_Galicia_1906> rdf:type owl:NamedIndividual ,
                                                                         :Bebida ;
+                                                               :CumpleRestricciones :intolerancia_lactosa ,
+                                                                                    :vegano ,
+                                                                                    :vegetariano ;
                                                                :BebidaAlcoholica "true"^^xsd:boolean ;
                                                                :Nombre "Cerveza Estrella Galicia 1906" ;
                                                                :Precio 3.00 ;
@@ -518,6 +522,9 @@
 ###  http://webprotege.stanford.edu/Cerveza_Moritz
 <http://webprotege.stanford.edu/Cerveza_Moritz> rdf:type owl:NamedIndividual ,
                                                          :Bebida ;
+                                                :CumpleRestricciones :intolerancia_lactosa ,
+                                                                     :vegano ,
+                                                                     :vegetariano ;
                                                 :BebidaAlcoholica "true"^^xsd:boolean ;
                                                 :Nombre "Cerveza Moritz" ;
                                                 :Precio 3.50 ;
@@ -527,6 +534,15 @@
 ###  http://webprotege.stanford.edu/Champagne_Renard-Barnier
 <http://webprotege.stanford.edu/Champagne_Renard-Barnier> rdf:type owl:NamedIndividual ,
                                                                    :Bebida ;
+                                                          :BebidasIncompatibles <http://webprotege.stanford.edu/Refresco_Aquarius> ,
+                                                                                <http://webprotege.stanford.edu/Refresco_Coca_Cola> ,
+                                                                                <http://webprotege.stanford.edu/Refresco_Fanta> ,
+                                                                                <http://webprotege.stanford.edu/Refresco_Nestea> ,
+                                                                                <http://webprotege.stanford.edu/Zumo_natural> ;
+                                                          :CumpleRestricciones :intolerancia_gluten ,
+                                                                               :intolerancia_lactosa ,
+                                                                               :vegano ,
+                                                                               :vegetariano ;
                                                           :BebidaAlcoholica "true"^^xsd:boolean ;
                                                           :Nombre "Champagne Renard-Barnier" ;
                                                           :Precio 27.00 ;
@@ -536,6 +552,10 @@
 ###  http://webprotege.stanford.edu/Copa_de_sangría
 <http://webprotege.stanford.edu/Copa_de_sangría> rdf:type owl:NamedIndividual ,
                                                           :Bebida ;
+                                                 :CumpleRestricciones :intolerancia_gluten ,
+                                                                      :intolerancia_lactosa ,
+                                                                      :vegano ,
+                                                                      :vegetariano ;
                                                  :BebidaAlcoholica "true"^^xsd:boolean ;
                                                  :Nombre "Copa de Sangría" ;
                                                  :Precio 4.00 ;
@@ -545,6 +565,10 @@
 ###  http://webprotege.stanford.edu/Copa_de_vino_blanco_Empordà
 <http://webprotege.stanford.edu/Copa_de_vino_blanco_Empordà> rdf:type owl:NamedIndividual ,
                                                                       :Bebida ;
+                                                             :CumpleRestricciones :intolerancia_gluten ,
+                                                                                  :intolerancia_lactosa ,
+                                                                                  :vegano ,
+                                                                                  :vegetariano ;
                                                              :BebidaAlcoholica "true"^^xsd:boolean ;
                                                              :Nombre "Copa de vino blanco D.O. Empordà" ;
                                                              :Precio 4.50 ;
@@ -554,6 +578,10 @@
 ###  http://webprotege.stanford.edu/Copa_de_vino_blanco_Penedès
 <http://webprotege.stanford.edu/Copa_de_vino_blanco_Penedès> rdf:type owl:NamedIndividual ,
                                                                       :Bebida ;
+                                                             :CumpleRestricciones :intolerancia_gluten ,
+                                                                                  :intolerancia_lactosa ,
+                                                                                  :vegano ,
+                                                                                  :vegetariano ;
                                                              :BebidaAlcoholica "true"^^xsd:boolean ;
                                                              :Nombre "Copa de vino blanco D.O. Penedès" ;
                                                              :Precio 3.50 ;
@@ -563,6 +591,10 @@
 ###  http://webprotege.stanford.edu/Copa_de_vino_rosado_Los_Frailes
 <http://webprotege.stanford.edu/Copa_de_vino_rosado_Los_Frailes> rdf:type owl:NamedIndividual ,
                                                                           :Bebida ;
+                                                                 :CumpleRestricciones :intolerancia_gluten ,
+                                                                                      :intolerancia_lactosa ,
+                                                                                      :vegano ,
+                                                                                      :vegetariano ;
                                                                  :BebidaAlcoholica "true"^^xsd:boolean ;
                                                                  :Nombre "Copa de vino rosado Los Frailes" ;
                                                                  :Precio 3.50 ;
@@ -572,6 +604,10 @@
 ###  http://webprotege.stanford.edu/Copa_de_vino_tinto_Fuenteseca
 <http://webprotege.stanford.edu/Copa_de_vino_tinto_Fuenteseca> rdf:type owl:NamedIndividual ,
                                                                         :Bebida ;
+                                                               :CumpleRestricciones :intolerancia_gluten ,
+                                                                                    :intolerancia_lactosa ,
+                                                                                    :vegano ,
+                                                                                    :vegetariano ;
                                                                :BebidaAlcoholica "true"^^xsd:boolean ;
                                                                :Nombre "Copa de vino tinto Fuenteseca" ;
                                                                :Precio 3.00 ;
@@ -581,6 +617,10 @@
 ###  http://webprotege.stanford.edu/Copa_de_vino_tinto_Vivanco
 <http://webprotege.stanford.edu/Copa_de_vino_tinto_Vivanco> rdf:type owl:NamedIndividual ,
                                                                      :Bebida ;
+                                                            :CumpleRestricciones :intolerancia_gluten ,
+                                                                                 :intolerancia_lactosa ,
+                                                                                 :vegano ,
+                                                                                 :vegetariano ;
                                                             :BebidaAlcoholica "true"^^xsd:boolean ;
                                                             :Nombre "Copa de vino tinto Vivanco" ;
                                                             :Precio 4.00 ;
@@ -592,7 +632,8 @@
                                                                               :Plato ;
                                                                      :BebidasRecomendadas <http://webprotege.stanford.edu/Agua> ,
                                                                                           <http://webprotege.stanford.edu/Copa_de_vino_blanco_Empordà> ,
-                                                                                          <http://webprotege.stanford.edu/Copa_de_vino_tinto_Vivanco> ;
+                                                                                          <http://webprotege.stanford.edu/Copa_de_vino_tinto_Vivanco> ,
+                                                                                          :Cerveza_Daura ;
                                                                      :CumplePreferencias :moderno ;
                                                                      :Ingredientes <http://webprotege.stanford.edu/cebolla> ,
                                                                                    <http://webprotege.stanford.edu/frutos_secos> ,
@@ -632,7 +673,7 @@
                                                                :queso ,
                                                                :sal ;
                                                  :Complejidad 32 ;
-                                                 :InfoGeneral "Plato frio de verdura y pasta"^^xsd:string ;
+                                                 :InfoGeneral "Plato frio de ensalada de pasta, verduras, queso y atún"^^xsd:string ;
                                                  :Nombre "Ensalada griega" ;
                                                  :Precio 7.75 ;
                                                  :TipoEnMenu "primero"^^xsd:string ;
@@ -660,7 +701,7 @@
                                                                                               :sal ,
                                                                                               :tomate ;
                                                                                 :Complejidad 55 ;
-                                                                                :InfoGeneral "Plato caliente de carne"^^xsd:string ;
+                                                                                :InfoGeneral "Plato caliente de carne y verduras"^^xsd:string ;
                                                                                 :Nombre "Entrecot a la plancha con salteado de verduras" ;
                                                                                 :Precio 23.50 ;
                                                                                 :TipoEnMenu "segundo"^^xsd:string ;
@@ -670,10 +711,11 @@
 ###  http://webprotege.stanford.edu/Espaguetis_con_mozzarella_albahaca_y_tomate
 <http://webprotege.stanford.edu/Espaguetis_con_mozzarella_albahaca_y_tomate> rdf:type owl:NamedIndividual ,
                                                                                       :Plato ;
-                                                                             :Bebidas <http://webprotege.stanford.edu/Cerveza_Moritz> ;
                                                                              :BebidasRecomendadas <http://webprotege.stanford.edu/Agua> ,
                                                                                                   <http://webprotege.stanford.edu/Cerveza_Estrella_Galicia_1906> ,
-                                                                                                  <http://webprotege.stanford.edu/Refresco_Aquarius> ;
+                                                                                                  <http://webprotege.stanford.edu/Cerveza_Moritz> ,
+                                                                                                  <http://webprotege.stanford.edu/Refresco_Aquarius> ,
+                                                                                                  :Cerveza_Daura ;
                                                                              :CumplePreferencias :clásico ;
                                                                              :Ingredientes <http://webprotege.stanford.edu/albahaca> ,
                                                                                            <http://webprotege.stanford.edu/orégano> ,
@@ -683,16 +725,41 @@
                                                                                            :sal ,
                                                                                            :tomate ;
                                                                              :Complejidad 20 ;
-                                                                             :InfoGeneral "Plato vegetariano frío de pasta"^^xsd:string ;
+                                                                             :InfoGeneral "Plato vegetariano templado de pasta"^^xsd:string ;
                                                                              :Nombre "Espaguetis con mozzarella albahaca y tomate" ;
                                                                              :Precio 11.25 ;
                                                                              :TipoEnMenu "primero"^^xsd:string ;
                                                                              rdfs:label "Espaguetis_con_mozzarella_albahaca_y_tomate" .
 
 
+###  http://webprotege.stanford.edu/Espaquetis_a_la_napolitana
+<http://webprotege.stanford.edu/Espaquetis_a_la_napolitana> rdf:type owl:NamedIndividual ,
+                                                                     :Plato ;
+                                                            :BebidasRecomendadas <http://webprotege.stanford.edu/Agua> ,
+                                                                                 <http://webprotege.stanford.edu/Agua_con_gas> ,
+                                                                                 <http://webprotege.stanford.edu/Copa_de_vino_blanco_Penedès> ,
+                                                                                 <http://webprotege.stanford.edu/Refresco_Aquarius> ,
+                                                                                 <http://webprotege.stanford.edu/Refresco_Coca_Cola> ,
+                                                                                 <http://webprotege.stanford.edu/Refresco_Fanta> ,
+                                                                                 <http://webprotege.stanford.edu/Refresco_Nestea> ;
+                                                            :CumplePreferencias :clásico ;
+                                                            :Ingredientes :aceite_de_oliva ,
+                                                                          :pasta ,
+                                                                          :sal ,
+                                                                          :tomate ;
+                                                            :Complejidad 10 ;
+                                                            :InfoGeneral "Plato caliente de pasta con salsa de tomate"^^xsd:string ;
+                                                            :Nombre "Espaguetis a la napolitana"^^xsd:string ;
+                                                            :Precio 4.00 ;
+                                                            :TipoEnMenu "primero"^^xsd:string ;
+                                                            rdfs:label "Espaguetis_a_la_napolitana"^^xsd:string .
+
+
 ###  http://webprotege.stanford.edu/Flan_de_huevo
 <http://webprotege.stanford.edu/Flan_de_huevo> rdf:type owl:NamedIndividual ,
                                                         :Plato ;
+                                               :CumplePreferencias :clásico ,
+                                                                   :sibarita ;
                                                :Ingredientes <http://webprotege.stanford.edu/azúcar> ,
                                                              <http://webprotege.stanford.edu/canela> ,
                                                              <http://webprotege.stanford.edu/leche> ,
@@ -714,7 +781,8 @@
                                                                                      <http://webprotege.stanford.edu/Cerveza_Estrella_Damm> ,
                                                                                      <http://webprotege.stanford.edu/Refresco_Coca_Cola> ,
                                                                                      <http://webprotege.stanford.edu/Refresco_Fanta> ,
-                                                                                     <http://webprotege.stanford.edu/Refresco_Nestea> ;
+                                                                                     <http://webprotege.stanford.edu/Refresco_Nestea> ,
+                                                                                     :Cerveza_Daura ;
                                                                 :CumplePreferencias :moderno ;
                                                                 :Ingredientes <http://webprotege.stanford.edu/ajo> ,
                                                                               <http://webprotege.stanford.edu/arroz> ,
@@ -735,6 +803,8 @@
 ###  http://webprotege.stanford.edu/Macedonia
 <http://webprotege.stanford.edu/Macedonia> rdf:type owl:NamedIndividual ,
                                                     :Plato ;
+                                           :CumplePreferencias :clásico ,
+                                                               :regional ;
                                            :Ingredientes <http://webprotege.stanford.edu/granada> ,
                                                          <http://webprotege.stanford.edu/manzana> ,
                                                          <http://webprotege.stanford.edu/naranja> ,
@@ -823,7 +893,7 @@
                                                 :Complejidad 25 ;
                                                 :InfoGeneral "Plato vegano caliente de pasta"^^xsd:string ;
                                                 :Nombre "Pasta al pesto" ;
-                                                :Precio 8.75 ;
+                                                :Precio 7.75 ;
                                                 :TipoEnMenu "primero"^^xsd:string ;
                                                 rdfs:label "Pasta_al_pesto" .
 
@@ -854,6 +924,12 @@
 ###  http://webprotege.stanford.edu/Refresco_Aquarius
 <http://webprotege.stanford.edu/Refresco_Aquarius> rdf:type owl:NamedIndividual ,
                                                             :Bebida ;
+                                                   :BebidasIncompatibles <http://webprotege.stanford.edu/Cava_Anna_de_Codorniu> ,
+                                                                         <http://webprotege.stanford.edu/Champagne_Renard-Barnier> ;
+                                                   :CumpleRestricciones :intolerancia_gluten ,
+                                                                        :intolerancia_lactosa ,
+                                                                        :vegano ,
+                                                                        :vegetariano ;
                                                    :BebidaAlcoholica "false"^^xsd:boolean ;
                                                    :Nombre "Refresco Aquarius" ;
                                                    :Precio 2.20 ;
@@ -863,6 +939,12 @@
 ###  http://webprotege.stanford.edu/Refresco_Coca_Cola
 <http://webprotege.stanford.edu/Refresco_Coca_Cola> rdf:type owl:NamedIndividual ,
                                                              :Bebida ;
+                                                    :BebidasIncompatibles <http://webprotege.stanford.edu/Cava_Anna_de_Codorniu> ,
+                                                                          <http://webprotege.stanford.edu/Champagne_Renard-Barnier> ;
+                                                    :CumpleRestricciones :intolerancia_gluten ,
+                                                                         :intolerancia_lactosa ,
+                                                                         :vegano ,
+                                                                         :vegetariano ;
                                                     :BebidaAlcoholica "false"^^xsd:boolean ;
                                                     :Nombre "Refresco Coca Cola" ;
                                                     :Precio 2.20 ;
@@ -872,6 +954,12 @@
 ###  http://webprotege.stanford.edu/Refresco_Fanta
 <http://webprotege.stanford.edu/Refresco_Fanta> rdf:type owl:NamedIndividual ,
                                                          :Bebida ;
+                                                :BebidasIncompatibles <http://webprotege.stanford.edu/Cava_Anna_de_Codorniu> ,
+                                                                      <http://webprotege.stanford.edu/Champagne_Renard-Barnier> ;
+                                                :CumpleRestricciones :intolerancia_gluten ,
+                                                                     :intolerancia_lactosa ,
+                                                                     :vegano ,
+                                                                     :vegetariano ;
                                                 :BebidaAlcoholica "false"^^xsd:boolean ;
                                                 :Nombre "Refresco Fanta" ;
                                                 :Precio 2.20 ;
@@ -881,6 +969,12 @@
 ###  http://webprotege.stanford.edu/Refresco_Nestea
 <http://webprotege.stanford.edu/Refresco_Nestea> rdf:type owl:NamedIndividual ,
                                                           :Bebida ;
+                                                 :BebidasIncompatibles <http://webprotege.stanford.edu/Cava_Anna_de_Codorniu> ,
+                                                                       <http://webprotege.stanford.edu/Champagne_Renard-Barnier> ;
+                                                 :CumpleRestricciones :intolerancia_gluten ,
+                                                                      :intolerancia_lactosa ,
+                                                                      :vegano ,
+                                                                      :vegetariano ;
                                                  :BebidaAlcoholica "false"^^xsd:boolean ;
                                                  :Nombre "Refresco Nestea" ;
                                                  :Precio 2.20 ;
@@ -938,6 +1032,35 @@
                                                   rdfs:label "Risotto_de_setas" .
 
 
+###  http://webprotege.stanford.edu/Risotto_de_setas_y_trufas
+<http://webprotege.stanford.edu/Risotto_de_setas_y_trufas> rdf:type owl:NamedIndividual ,
+                                                                    :Plato ;
+                                                           :BebidasRecomendadas <http://webprotege.stanford.edu/Agua> ,
+                                                                                <http://webprotege.stanford.edu/Agua_con_gas> ,
+                                                                                <http://webprotege.stanford.edu/Cava_Anna_de_Codorniu> ,
+                                                                                <http://webprotege.stanford.edu/Champagne_Renard-Barnier> ,
+                                                                                <http://webprotege.stanford.edu/Copa_de_vino_blanco_Empordà> ,
+                                                                                <http://webprotege.stanford.edu/Copa_de_vino_blanco_Penedès> ;
+                                                           :CumplePreferencias :clásico ,
+                                                                               :sibarita ;
+                                                           :Ingredientes <http://webprotege.stanford.edu/ajo> ,
+                                                                         <http://webprotege.stanford.edu/arroz> ,
+                                                                         <http://webprotege.stanford.edu/caldo_de_verduras> ,
+                                                                         <http://webprotege.stanford.edu/cebolla> ,
+                                                                         <http://webprotege.stanford.edu/pimienta> ,
+                                                                         <http://webprotege.stanford.edu/seta> ,
+                                                                         <http://webprotege.stanford.edu/trufa> ,
+                                                                         :aceite_de_oliva ,
+                                                                         :queso ,
+                                                                         :sal ;
+                                                           :Complejidad 60 ;
+                                                           :InfoGeneral "Plato caliente, risotto con setas y exquisitas trufas negras"^^xsd:string ;
+                                                           :Nombre "Risotto de setas y trufas"^^xsd:string ;
+                                                           :Precio 40.00 ;
+                                                           :TipoEnMenu "primero"^^xsd:string ;
+                                                           rdfs:label "Risotto_de_setas_y_trufas" .
+
+
 ###  http://webprotege.stanford.edu/Salmón_al_horno_con_patata
 <http://webprotege.stanford.edu/Salmón_al_horno_con_patata> rdf:type owl:NamedIndividual ,
                                                                      :Plato ;
@@ -955,11 +1078,35 @@
                                                                           :sal ;
                                                             :Complejidad 45 ;
                                                             :InfoGeneral "Plato caliente de pescado"^^xsd:string ;
-                                                            :Nombre "Salmón al horno con patata" ,
-                                                                    "Salmón_al_horno_con_patata" ;
+                                                            :Nombre "Salmón al horno con patata" ;
                                                             :Precio 13.00 ;
                                                             :TipoEnMenu "segundo"^^xsd:string ;
                                                             rdfs:label "Salmón_al_horno_con_patata" .
+
+
+###  http://webprotege.stanford.edu/Solomillo_de_Wagyu_con_verduras_salteadas
+<http://webprotege.stanford.edu/Solomillo_de_Wagyu_con_verduras_salteadas> rdf:type owl:NamedIndividual ,
+                                                                                    :Plato ;
+                                                                           :BebidasRecomendadas <http://webprotege.stanford.edu/Agua> ,
+                                                                                                <http://webprotege.stanford.edu/Cava_Anna_de_Codorniu> ,
+                                                                                                <http://webprotege.stanford.edu/Champagne_Renard-Barnier> ,
+                                                                                                <http://webprotege.stanford.edu/Copa_de_vino_tinto_Fuenteseca> ,
+                                                                                                <http://webprotege.stanford.edu/Copa_de_vino_tinto_Vivanco> ;
+                                                                           :CumplePreferencias :moderno ,
+                                                                                               :sibarita ;
+                                                                           :Ingredientes <http://webprotege.stanford.edu/cebolla> ,
+                                                                                         <http://webprotege.stanford.edu/pimiento_rojo> ,
+                                                                                         <http://webprotege.stanford.edu/salsa_de_soja> ,
+                                                                                         <http://webprotege.stanford.edu/wagyu> ,
+                                                                                         <http://webprotege.stanford.edu/zanahoria> ,
+                                                                                         :aceite_de_oliva ,
+                                                                                         :sal ;
+                                                                           :Complejidad 30 ;
+                                                                           :InfoGeneral "Solomillo de la famosa carne Wagyu con un salteado de verduras con salsa de soja"^^xsd:string ;
+                                                                           :Nombre "Solomillo de Wagyu con verduras salteadas"^^xsd:string ;
+                                                                           :Precio 50.00 ;
+                                                                           :TipoEnMenu "segundo"^^xsd:string ;
+                                                                           rdfs:label "Solomillo_de_Wagyu_con_verduras_salteadas" .
 
 
 ###  http://webprotege.stanford.edu/Tacos_de_hummus_con_aguacate
@@ -989,6 +1136,9 @@
 ###  http://webprotege.stanford.edu/Tiramisú
 <http://webprotege.stanford.edu/Tiramisú> rdf:type owl:NamedIndividual ,
                                                    :Plato ;
+                                          :CumplePreferencias :clásico ,
+                                                              :regional ,
+                                                              :sibarita ;
                                           :Ingredientes <http://webprotege.stanford.edu/almidón> ,
                                                         <http://webprotege.stanford.edu/azúcar> ,
                                                         <http://webprotege.stanford.edu/cacao> ,
@@ -1008,6 +1158,12 @@
 ###  http://webprotege.stanford.edu/Zumo_natural
 <http://webprotege.stanford.edu/Zumo_natural> rdf:type owl:NamedIndividual ,
                                                        :Bebida ;
+                                              :BebidasIncompatibles <http://webprotege.stanford.edu/Cava_Anna_de_Codorniu> ,
+                                                                    <http://webprotege.stanford.edu/Champagne_Renard-Barnier> ;
+                                              :CumpleRestricciones :intolerancia_gluten ,
+                                                                   :intolerancia_lactosa ,
+                                                                   :vegano ,
+                                                                   :vegetariano ;
                                               :BebidaAlcoholica "false"^^xsd:boolean ;
                                               :Nombre "Zumo natural" ;
                                               :Precio 3.00 ;
@@ -1416,12 +1572,12 @@
 ###  http://webprotege.stanford.edu/langostino
 <http://webprotege.stanford.edu/langostino> rdf:type owl:NamedIndividual ,
                                                      :Ingrediente ;
+                                            :CumpleRestricciones :intolerancia_gluten ,
+                                                                 :intolerancia_lactosa ;
                                             :Disponibilidad :invierno ,
                                                             :otoño ,
                                                             :primavera ,
                                                             :verano ;
-                                            :Restricciones :intolerancia_gluten ,
-                                                           :intolerancia_lactosa ;
                                             :Nombre "Langostino" ;
                                             rdfs:label "langostino" .
 
@@ -1541,6 +1697,20 @@
                                          rdfs:label "orégano" .
 
 
+###  http://webprotege.stanford.edu/pan
+<http://webprotege.stanford.edu/pan> rdf:type owl:NamedIndividual ,
+                                              :Ingrediente ;
+                                     :CumpleRestricciones :intolerancia_lactosa ,
+                                                          :vegano ,
+                                                          :vegetariano ;
+                                     :Disponibilidad :invierno ,
+                                                     :otoño ,
+                                                     :primavera ,
+                                                     :verano ;
+                                     :Nombre "Pan"^^xsd:string ;
+                                     rdfs:label "pan" .
+
+
 ###  http://webprotege.stanford.edu/patata
 <http://webprotege.stanford.edu/patata> rdf:type owl:NamedIndividual ,
                                                  :Ingrediente ;
@@ -1649,14 +1819,14 @@
 ###  http://webprotege.stanford.edu/pimiento_verde
 <http://webprotege.stanford.edu/pimiento_verde> rdf:type owl:NamedIndividual ,
                                                          :Ingrediente ;
+                                                :CumpleRestricciones :intolerancia_gluten ,
+                                                                     :intolerancia_lactosa ,
+                                                                     :vegano ,
+                                                                     :vegetariano ;
                                                 :Disponibilidad :invierno ,
                                                                 :otoño ,
                                                                 :primavera ,
                                                                 :verano ;
-                                                :Restricciones :intolerancia_gluten ,
-                                                               :intolerancia_lactosa ,
-                                                               :vegano ,
-                                                               :vegetariano ;
                                                 :Nombre "Pimiento verde" ;
                                                 rdfs:label "pimiento_verde"^^xsd:string .
 
@@ -1692,14 +1862,14 @@
 ###  http://webprotege.stanford.edu/romero
 <http://webprotege.stanford.edu/romero> rdf:type owl:NamedIndividual ,
                                                  :Ingrediente ;
+                                        :CumpleRestricciones :intolerancia_gluten ,
+                                                             :intolerancia_lactosa ,
+                                                             :vegano ,
+                                                             :vegetariano ;
                                         :Disponibilidad :invierno ,
                                                         :otoño ,
                                                         :primavera ,
                                                         :verano ;
-                                        :Restricciones :intolerancia_gluten ,
-                                                       :intolerancia_lactosa ,
-                                                       :vegano ,
-                                                       :vegetariano ;
                                         :Nombre "Romero" ;
                                         rdfs:label "romero" .
 
@@ -1739,7 +1909,8 @@
                                                            :intolerancia_lactosa ,
                                                            :vegano ,
                                                            :vegetariano ;
-                                      :Disponibilidad :otoño ;
+                                      :Disponibilidad :invierno ,
+                                                      :otoño ;
                                       :Nombre "Seta" ;
                                       rdfs:label "seta" .
 
@@ -1786,6 +1957,19 @@
                                            rdfs:label "tortillas" .
 
 
+###  http://webprotege.stanford.edu/trufa
+<http://webprotege.stanford.edu/trufa> rdf:type owl:NamedIndividual ,
+                                                :Ingrediente ;
+                                       :CumpleRestricciones :intolerancia_gluten ,
+                                                            :intolerancia_lactosa ,
+                                                            :vegano ,
+                                                            :vegetariano ;
+                                       :Disponibilidad :invierno ,
+                                                       :otoño ;
+                                       :Nombre "Trufa"^^xsd:string ;
+                                       rdfs:label "trufa" .
+
+
 ###  http://webprotege.stanford.edu/uva
 <http://webprotege.stanford.edu/uva> rdf:type owl:NamedIndividual ,
                                               :Ingrediente ;
@@ -1804,14 +1988,13 @@
 ###  http://webprotege.stanford.edu/vinagre
 <http://webprotege.stanford.edu/vinagre> rdf:type owl:NamedIndividual ,
                                                   :Ingrediente ;
+                                         :CumpleRestricciones :intolerancia_gluten ,
+                                                              :intolerancia_lactosa ,
+                                                              :vegano ;
                                          :Disponibilidad :invierno ,
                                                          :otoño ,
                                                          :primavera ,
                                                          :verano ;
-                                         :Restricciones :intolerancia_gluten ,
-                                                        :intolerancia_lactosa ,
-                                                        :vegano ,
-                                                        :vegetariano ;
                                          :Nombre "Vinagre" ;
                                          rdfs:label "vinagre" .
 
@@ -1829,6 +2012,19 @@
                                                              :verano ;
                                              :Nombre "Vino blanco" ;
                                              rdfs:label "vino_blanco"^^xsd:string .
+
+
+###  http://webprotege.stanford.edu/wagyu
+<http://webprotege.stanford.edu/wagyu> rdf:type owl:NamedIndividual ,
+                                                :Ingrediente ;
+                                       :CumpleRestricciones :intolerancia_gluten ,
+                                                            :intolerancia_lactosa ;
+                                       :Disponibilidad :invierno ,
+                                                       :otoño ,
+                                                       :primavera ,
+                                                       :verano ;
+                                       :Nombre "Carne de Wagyu"^^xsd:string ;
+                                       rdfs:label "wagyu" .
 
 
 ###  http://webprotege.stanford.edu/zanahoria
@@ -1854,7 +2050,8 @@
                                                                                      <http://webprotege.stanford.edu/Agua_con_gas> ,
                                                                                      <http://webprotege.stanford.edu/Cerveza_Moritz> ,
                                                                                      <http://webprotege.stanford.edu/Copa_de_sangría> ,
-                                                                                     <http://webprotege.stanford.edu/Copa_de_vino_blanco_Penedès> ;
+                                                                                     <http://webprotege.stanford.edu/Copa_de_vino_blanco_Penedès> ,
+                                                                                     :Cerveza_Daura ;
                                                                 :CumplePreferencias :moderno ,
                                                                                     :regional ;
                                                                 :Ingredientes <http://webprotege.stanford.edu/ajo> ,
@@ -1886,6 +2083,44 @@
                                         rdfs:label "ñoquis" .
 
 
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Carpaccio_de_gamba_con_nougatine_de_curry_y_boletus
+:Carpaccio_de_gamba_con_nougatine_de_curry_y_boletus rdf:type owl:NamedIndividual ,
+                                                              :Plato ;
+                                                     <http://webprotege.stanford.edu/PlatosIncompatibles> :Carpaccio_de_gamba_con_nougatine_de_curry_y_boletus ;
+                                                     :BebidasRecomendadas <http://webprotege.stanford.edu/Agua> ,
+                                                                          <http://webprotege.stanford.edu/Cava_Anna_de_Codorniu> ,
+                                                                          <http://webprotege.stanford.edu/Champagne_Renard-Barnier> ,
+                                                                          <http://webprotege.stanford.edu/Copa_de_vino_blanco_Empordà> ;
+                                                     :CumplePreferencias :moderno ,
+                                                                         :sibarita ;
+                                                     :Ingredientes <http://webprotege.stanford.edu/azúcar> ,
+                                                                   <http://webprotege.stanford.edu/cebolla> ,
+                                                                   <http://webprotege.stanford.edu/harina> ,
+                                                                   <http://webprotege.stanford.edu/seta> ,
+                                                                   :aceite_de_oliva ,
+                                                                   :curry ,
+                                                                   :gambas__rojas ,
+                                                                   :rucula ,
+                                                                   :sal ;
+                                                     :Complejidad 90 ;
+                                                     :InfoGeneral "Plato de frío de gamba para paladares exquisitos." ;
+                                                     :Nombre "Carpaccio de gamba con nougatine de curry y boletus" ;
+                                                     :Precio 30.00 ;
+                                                     :TipoEnMenu "primero_segundo" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Cerveza_Daura
+:Cerveza_Daura rdf:type owl:NamedIndividual ,
+                        :Bebida ;
+               :CumpleRestricciones :intolerancia_gluten ,
+                                    :intolerancia_lactosa ,
+                                    :vegano ,
+                                    :vegetariano ;
+               :BebidaAlcoholica "true"^^xsd:boolean ;
+               :Nombre "Cerveza Daura (Sin Gluten)" ;
+               :Precio 2.70 .
+
+
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Macarrones_con_chorizo
 :Macarrones_con_chorizo rdf:type owl:NamedIndividual ,
                                  :Plato ;
@@ -1908,8 +2143,56 @@
                         :Complejidad 30 ;
                         :InfoGeneral "Plato caliente de pasta y carne" ;
                         :Nombre "Macarrones con chorizo" ;
-                        :Precio 10.50 ;
+                        :Precio 8.50 ;
                         :TipoEnMenu "primero"^^xsd:string .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Parrillada_de_verduras
+:Parrillada_de_verduras rdf:type owl:NamedIndividual ,
+                                 :Plato ;
+                        :BebidasRecomendadas <http://webprotege.stanford.edu/Agua> ,
+                                             <http://webprotege.stanford.edu/Cava_Anna_de_Codorniu> ,
+                                             <http://webprotege.stanford.edu/Champagne_Renard-Barnier> ,
+                                             <http://webprotege.stanford.edu/Copa_de_vino_rosado_Los_Frailes> ,
+                                             <http://webprotege.stanford.edu/Copa_de_vino_tinto_Vivanco> ;
+                        :CumplePreferencias :moderno ,
+                                            :sibarita ;
+                        :Ingredientes <http://webprotege.stanford.edu/cebolla> ,
+                                      <http://webprotege.stanford.edu/pimiento_rojo> ,
+                                      <http://webprotege.stanford.edu/pimiento_verde> ,
+                                      <http://webprotege.stanford.edu/zanahoria> ,
+                                      :aceite_de_oliva ,
+                                      :agar_agar ,
+                                      :apio ,
+                                      :esparrago ,
+                                      :gelatina_en_hoja ,
+                                      :nabo ,
+                                      :sal ;
+                        :Complejidad 70 ;
+                        :InfoGeneral "Plato frío sibarita, de gelatinas hechas de verduras" ;
+                        :Nombre "Parrillada de gelatina de verduras" ;
+                        :Precio 35.50 ;
+                        :TipoEnMenu "primero" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#Taco_cristalizado_de_mojito_y_menta
+:Taco_cristalizado_de_mojito_y_menta rdf:type owl:NamedIndividual ,
+                                              :Plato ;
+                                     :CumplePreferencias :moderno ,
+                                                         :sibarita ;
+                                     :Ingredientes <http://webprotege.stanford.edu/azúcar> ,
+                                                   <http://webprotege.stanford.edu/melón> ,
+                                                   :agar_agar ,
+                                                   :agua ,
+                                                   :lima ,
+                                                   :mango ,
+                                                   :menta ,
+                                                   :ron ;
+                                     :Complejidad 50 ;
+                                     :InfoGeneral "Postre frío, taco de azúcar cristalizado de lima, melón menta y mango" ;
+                                     :Nombre "Taco cristalizado de mojito y menta" ;
+                                     :Precio 26.50 ;
+                                     :TipoEnMenu "postre" .
 
 
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#aceite_de_oliva
@@ -1926,18 +2209,58 @@
                  :Nombre "Aceite de oliva virgen extra" .
 
 
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#agar_agar
+:agar_agar rdf:type owl:NamedIndividual ,
+                    :Ingrediente ;
+           :CumpleRestricciones :intolerancia_gluten ,
+                                :intolerancia_lactosa ,
+                                :vegano ,
+                                :vegetariano ;
+           :Disponibilidad :invierno ,
+                           :otoño ,
+                           :primavera ,
+                           :verano ;
+           :Nombre "Agar Agar" .
+
+
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#agua
 :agua rdf:type owl:NamedIndividual ,
                :Ingrediente ;
+      :CumpleRestricciones :intolerancia_gluten ,
+                           :intolerancia_lactosa ,
+                           :vegano ,
+                           :vegetariano ;
       :Disponibilidad :invierno ,
                       :otoño ,
                       :primavera ,
                       :verano ;
-      :Restricciones :intolerancia_gluten ,
-                     :intolerancia_lactosa ,
-                     :vegano ,
-                     :vegetariano ;
       :Nombre "Agua" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#apio
+:apio rdf:type owl:NamedIndividual ,
+               :Ingrediente ;
+      :CumpleRestricciones :intolerancia_gluten ,
+                           :intolerancia_lactosa ,
+                           :vegano ,
+                           :vegetariano ;
+      :Disponibilidad :invierno ,
+                      :otoño ,
+                      :primavera ,
+                      :verano ;
+      :Nombre "Apio" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#butifarra
+:butifarra rdf:type owl:NamedIndividual ,
+                    :Ingrediente ;
+           :CumpleRestricciones :intolerancia_gluten ,
+                                :intolerancia_lactosa ;
+           :Disponibilidad :invierno ,
+                           :otoño ,
+                           :primavera ,
+                           :verano ;
+           :Nombre "Butifarra" .
 
 
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#chorizo
@@ -1956,6 +2279,60 @@
 :clásico rdf:type owl:NamedIndividual ,
                   :Preferencia ;
          :Nombre "Estilo clásico" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#curry
+:curry rdf:type owl:NamedIndividual ,
+                :Ingrediente ;
+       :CumpleRestricciones :intolerancia_gluten ,
+                            :intolerancia_lactosa ,
+                            :vegano ,
+                            :vegetariano ;
+       :Disponibilidad :invierno ,
+                       :otoño ,
+                       :primavera ,
+                       :verano ;
+       :Nombre "Curry" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#esparrago
+:esparrago rdf:type owl:NamedIndividual ,
+                    :Ingrediente ;
+           :CumpleRestricciones :intolerancia_gluten ,
+                                :intolerancia_lactosa ,
+                                :vegano ,
+                                :vegetariano ;
+           :Disponibilidad :invierno ,
+                           :otoño ,
+                           :primavera ,
+                           :verano ;
+           :Nombre "Espárrago" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#gambas__rojas
+:gambas__rojas rdf:type owl:NamedIndividual ,
+                        :Ingrediente ;
+               :CumpleRestricciones :intolerancia_gluten ,
+                                    :intolerancia_lactosa ;
+               :Disponibilidad :invierno ,
+                               :otoño ,
+                               :primavera ,
+                               :verano ;
+               :Nombre "Gambas rojas" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#gelatina_en_hoja
+:gelatina_en_hoja rdf:type owl:NamedIndividual ,
+                           :Ingrediente ;
+                  :CumpleRestricciones :intolerancia_gluten ,
+                                       :intolerancia_lactosa ,
+                                       :vegano ,
+                                       :vegetariano ;
+                  :Disponibilidad :invierno ,
+                                  :otoño ,
+                                  :primavera ,
+                                  :verano ;
+                  :Nombre "Gelatina en hoja" .
 
 
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#huevo
@@ -1989,10 +2366,65 @@
           :Nombre "Invierno" .
 
 
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#lima
+:lima rdf:type owl:NamedIndividual ,
+               :Ingrediente ;
+      :CumpleRestricciones :intolerancia_gluten ,
+                           :intolerancia_lactosa ,
+                           :vegano ,
+                           :vegetariano ;
+      :Disponibilidad :invierno ,
+                      :otoño ,
+                      :primavera ,
+                      :verano ;
+      :Nombre "Lima" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#mango
+:mango rdf:type owl:NamedIndividual ,
+                :Ingrediente ;
+       :CumpleRestricciones :intolerancia_gluten ,
+                            :intolerancia_lactosa ,
+                            :vegano ,
+                            :vegetariano ;
+       :Disponibilidad :invierno ,
+                       :otoño ,
+                       :primavera ,
+                       :verano ;
+       :Nombre "Mango" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#menta
+:menta rdf:type owl:NamedIndividual ,
+                :Ingrediente ;
+       :CumpleRestricciones :intolerancia_gluten ,
+                            :intolerancia_lactosa ,
+                            :vegano ,
+                            :vegetariano ;
+       :Disponibilidad :otoño ,
+                       :primavera ,
+                       :verano ;
+       :Nombre "Menta" .
+
+
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#moderno
 :moderno rdf:type owl:NamedIndividual ,
                   :Preferencia ;
          :Nombre "Estilo moderno" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#nabo
+:nabo rdf:type owl:NamedIndividual ,
+               :Ingrediente ;
+      :CumpleRestricciones :intolerancia_gluten ,
+                           :intolerancia_lactosa ,
+                           :vegano ,
+                           :vegetariano ;
+      :Disponibilidad :invierno ,
+                      :otoño ,
+                      :primavera ,
+                      :verano ;
+      :Nombre "Nabo" .
 
 
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#otoño
@@ -2038,17 +2470,45 @@
           :Nombre "Estilo regional" .
 
 
-###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#sal
-:sal rdf:type owl:NamedIndividual ,
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#ron
+:ron rdf:type owl:NamedIndividual ,
               :Ingrediente ;
+     :CumpleRestricciones :intolerancia_gluten ,
+                          :intolerancia_lactosa ,
+                          :vegano ,
+                          :vegetariano ;
      :Disponibilidad :invierno ,
                      :otoño ,
                      :primavera ,
                      :verano ;
-     :Restricciones :intolerancia_gluten ,
-                    :intolerancia_lactosa ,
-                    :vegano ,
-                    :vegetariano ;
+     :Nombre "Ron" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#rucula
+:rucula rdf:type owl:NamedIndividual ,
+                 :Ingrediente ;
+        :CumpleRestricciones :intolerancia_gluten ,
+                             :intolerancia_lactosa ,
+                             :vegano ,
+                             :vegetariano ;
+        :Disponibilidad :invierno ,
+                        :otoño ,
+                        :primavera ,
+                        :verano ;
+        :Nombre "Rúcula" .
+
+
+###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#sal
+:sal rdf:type owl:NamedIndividual ,
+              :Ingrediente ;
+     :CumpleRestricciones :intolerancia_gluten ,
+                          :intolerancia_lactosa ,
+                          :vegano ,
+                          :vegetariano ;
+     :Disponibilidad :invierno ,
+                     :otoño ,
+                     :primavera ,
+                     :verano ;
      :Nombre "Sal" .
 
 
@@ -2061,14 +2521,14 @@
 ###  http://www.semanticweb.org/asus/ontologies/2021/4/untitled-ontology-3#tomate
 :tomate rdf:type owl:NamedIndividual ,
                  :Ingrediente ;
+        :CumpleRestricciones :intolerancia_gluten ,
+                             :intolerancia_lactosa ,
+                             :vegano ,
+                             :vegetariano ;
         :Disponibilidad :invierno ,
                         :otoño ,
                         :primavera ,
                         :verano ;
-        :Restricciones :intolerancia_gluten ,
-                       :intolerancia_lactosa ,
-                       :vegano ,
-                       :vegetariano ;
         :Nombre "Tomate" .
 
 
@@ -2088,23 +2548,6 @@
 :verano rdf:type owl:NamedIndividual ,
                  :Temporada ;
         :Nombre "Verano" .
-
-
-#################################################################
-#    General axioms
-#################################################################
-
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :Bebida
-                :DatosEvento
-                :Ingrediente
-                :Menu
-                :Plato
-                :Preferencia
-                :RestriccionAlimentaria
-                :Temporada
-              )
-] .
 
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
